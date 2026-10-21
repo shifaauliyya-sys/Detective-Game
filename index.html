@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Case of the Vanished Trophy</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .game-container {
+      max-width: 900px;
+      width: 100%;
+      background: #2a2a2a;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .slide-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background: #111;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: #d97706;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    button:disabled {
+      background-color: #555;
+      cursor: not-allowed;
+    }
+    .page-info {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="game-container">
+  <!-- Ganti 'src' di bawah sesuai nama file gambar kamu -->
+  <img id="game-slide" class="slide-img" src="1.png" alt="Game Slide">
+  
+  <div class="controls">
+    <button id="btn-prev" onclick="changeSlide(-1)">← Sebelum/Kembali</button>
+    <span class="page-info" id="page-number">Slide 1 dari 8</span>
+    <button id="btn-next" onclick="changeSlide(1)">Lanjut →</button>
+  </div>
+</div>
+
+<script>
+  // Daftar urutan gambar sesuai file milikmu
+  const slides = [
+    "1.png", // Cover / Title
+    "2.png", // Case Briefing & Suspects
+    "3.png", // Suspect 1 - Rina
+    "4.png", // Suspect 2 - Pak Hendra
+    "5.png", // Suspect 3 - Dinda
+    "7.png", // Clue #1
+    "8.png", // Clue #2
+    "9.png", // Clue #3
+    "10.png",// Clue #4
+    "11.png" // Clue #5
+  ];
+
+  let currentIndex = 0;
+
+  function updateSlide() {
+    document.getElementById("game-slide").src = slides[currentIndex];
+    document.getElementById("page-number").innerText = `Slide ${currentIndex + 1} dari ${slides.length}`;
+    
+    document.getElementById("btn-prev").disabled = (currentIndex === 0);
+    document.getElementById("btn-next").disabled = (currentIndex === slides.length - 1);
+  }
+
+  function changeSlide(direction) {
+    currentIndex += direction;
+    updateSlide();
+  }
+
+  // Inisialisasi slide pertama
+  updateSlide();
+</script>
+
+</body>
+</html>
